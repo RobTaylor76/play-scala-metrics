@@ -1,4 +1,4 @@
-Added Play metrics to teh app so that /admin/metrics shows teh metrics.
+Added Play metrics to thw app so that /admin/metrics shows thw metrics.
 
 Next step will be to plugin talking to graphite...
 
