@@ -18,9 +18,12 @@ object Config extends GlobalSettings {
  private def setupGraphite(app: Application)  = {
 
 //  val graphite = new PickledGraphite(new InetSocketAddress("graphite.example.com", 2004));
-  val graphite = new Graphite(new InetSocketAddress("localhost", 2003));
 
   val metricsPrefix = app.configuration.getString("metrics.prefix").getOrElse("NO-PREFIX")
+  val metricsHost = app.configuration.getString("metrics.server.address").getOrElse("localhost")
+  val metricsPort = app.configuration.getInt("metrics.server.port").getOrElse(2003)
+
+  val graphite = new Graphite(new InetSocketAddress(metricsHost, metricsPort));
 
   val registry = SharedMetricRegistries.getOrCreate("default")
   val reporter : GraphiteReporter =  GraphiteReporter.forRegistry(registry)
