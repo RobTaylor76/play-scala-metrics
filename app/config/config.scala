@@ -9,7 +9,10 @@ import play.api._
 object Config extends GlobalSettings {
 
   override def onStart(app: Application) {
-      setupGraphite(app)
+      val metricsEnabled = app.configuration.getString("metrics.enabled").getOrElse("false").toBoolean
+      if (metricsEnabled) {
+        setupGraphite(app)
+      }
       Logger.info("Application has started")
 
    }
@@ -18,6 +21,7 @@ object Config extends GlobalSettings {
  private def setupGraphite(app: Application)  = {
 
 //  val graphite = new PickledGraphite(new InetSocketAddress("graphite.example.com", 2004));
+
 
   val metricsPrefix = app.configuration.getString("metrics.prefix").getOrElse("NO-PREFIX")
   val metricsHost = app.configuration.getString("metrics.server.address").getOrElse("localhost")
