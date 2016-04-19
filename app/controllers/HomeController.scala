@@ -16,10 +16,21 @@ object HomeController extends Controller {
    * a path of `/`.
    */
   def index = Action {
-
-
     //var obj = com.kenshoo.play.metrics.MetricsController.metrics
     Ok(views.html.index("Your new application is ready."))
   }
+
+
+  def error = Action {
+    throw new Exception("Example Error Message")
+    Ok(views.html.index("Your new application is ready."))
+  }
+
+  def random = Action {
+    //var obj = com.kenshoo.play.metrics.MetricsController.metrics
+    Ok(views.html.index("Your new application is ready."))
+  }
+
+
 
 }
